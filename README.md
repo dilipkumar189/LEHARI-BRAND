@@ -1,2 +1,1 @@
-# Dilip Suthar
-LEHARI BRAND
+# LEHARI BRAND
