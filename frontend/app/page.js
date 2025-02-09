@@ -1,38 +1,48 @@
 "use client";
 
-import React, { useEffect } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import React, { useEffect, useState } from 'react';
+import Image from 'next/image';
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import Atropos from 'atropos/react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-import { ArrowUp, Star, ChevronRight } from 'lucide-react';
+import { Badge } from "@/components/ui/badge";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { ArrowUp, Star, ChevronRight, Clock, Award, Package, Heart } from 'lucide-react';
 
-// Featured Products Data
+
 const products = [
   { 
     id: 1, 
     name: 'Vintage Wall Clock', 
-    price: '$129', 
-    image: 'https://images.unsplash.com/photo-1563861826100-9cb868fdbe1c'
+    price: '$129',
+    rating: 4.8,
+    badge: 'Best Seller',
+    image: 'https://images.unsplash.com/photo-1501139083538-0139583c060f'
   },
   { 
     id: 2, 
     name: 'Modern Sundial', 
-    price: '$159', 
-    image: 'https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcQxOwVyjhptgac_Lg9fqLc3PU9nDML384mfITjdtx8Km0J8ND2IGxBq9KmuuFWaS4kob9ejoGGMrjtUoiZ5H09ABgF_pvp3wCPSIWW4XGI&usqp=CAE'
+    price: '$159',
+    rating: 4.6,
+    badge: 'New',
+    image: 'https://images.unsplash.com/photo-1587925358603-c2eea5305bbc'
   },
   { 
     id: 3, 
     name: 'Minimalist Timepiece', 
-    price: '$99', 
-    image: 'https://images.unsplash.com/photo-1509048191080-d2984bad6ae5'
+    price: '$99',
+    rating: 4.7,
+    image: 'https://images.unsplash.com/photo-1495856458515-0637185db551'
   },
   { 
     id: 4, 
     name: 'Rustic Grandfather Clock', 
-    price: '$299', 
-    image: 'https://images.unsplash.com/photo-1585586463948-9e40851ed193'
+    price: '$299',
+    rating: 4.9,
+    badge: 'Limited',
+    image: 'https://images.unsplash.com/photo-1415604934674-561df9abf539'
   }
 ];
 
@@ -44,50 +54,185 @@ const testimonials = [
   { id: 3, text: "Absolutely stunning. The attention to detail is remarkable.", author: "Emily K." }
 ];
 
+const features = [
+  {
+    icon: <Clock className="h-6 w-6" />,
+    title: "Timeless Design",
+    description: "Each piece crafted to last generations"
+  },
+  {
+    icon: <Award className="h-6 w-6" />,
+    title: "Expert Craftsmanship",
+    description: "Created by master artisans"
+  },
+  {
+    icon: <Package className="h-6 w-6" />,
+    title: "Free Shipping",
+    description: "Worldwide on orders over $500"
+  },
+  {
+    icon: <Heart className="h-6 w-6" />,
+    title: "Satisfaction Guaranteed",
+    description: "30-day return policy"
+  }
+];
+
 const LehariLanding = () => {
+  const [activeTab, setActiveTab] = useState('all');
   const { scrollY } = useScroll();
   const y = useTransform(scrollY, [0, 1000], [0, 200]);
+  const opacity = useTransform(scrollY, [0, 300], [1, 0]);
+
+  // Parallax effect for hero section
+  const heroImageY = useTransform(scrollY, [0, 500], [0, 150]);
+  const heroTextY = useTransform(scrollY, [0, 500], [0, -50]);
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Hero Section */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden">
-        <Atropos 
-          className="w-full max-w-4xl"
-          highlight={false}
-          shadow={false}
-        >
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center"
+      {/* Enhanced Hero Section */}
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 pb-32">
+          <motion.div 
+            className="absolute inset-0 z-0"
+            style={{ y: heroImageY }}
           >
-            <h1 className="text-5xl md:text-7xl font-bold mb-6">
-              Timeless Craftsmanship
-            </h1>
-            <p className="text-xl mb-8 text-gray-600">
-              Handcrafted timepieces that blend art with functionality
-            </p>
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <Button size="lg" className="bg-black text-white px-8 py-6 text-lg">
-                Shop Now <ChevronRight className="ml-2" />
-              </Button>
-            </motion.div>
+            <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-white" />
+            <Image
+              src="https://images.unsplash.com/photo-1461988320302-91bde64fc8e4"
+              alt="Background"
+              fill
+              className="object-cover"
+              priority
+              quality={100}
+            />
           </motion.div>
-          <img 
-            src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcQxOwVyjhptgac_Lg9fqLc3PU9nDML384mfITjdtx8Km0J8ND2IGxBq9KmuuFWaS4kob9ejoGGMrjtUoiZ5H09ABgF_pvp3wCPSIWW4XGI&usqp=CAE" 
-            alt="Featured Clock"
-            className="mt-12 rounded-lg shadow-2xl"
-            data-atropos-offset="5"
-          />
-        </Atropos>
+
+          <Atropos 
+            className="w-full max-w-5xl relative z-10 px-4"
+            highlight={false}
+            shadow={false}
+          >
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.2 }}
+              style={{ y: heroTextY }}
+              className="text-center"
+            >
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.8 }}
+              >
+                <Badge className="mb-6 text-lg px-6 py-2 bg-white/90 text-black">
+                  Handcrafted Excellence
+                </Badge>
+              </motion.div>
+              
+              <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold mb-8 text-white text-shadow-lg">
+                Timeless Craftsmanship
+              </h1>
+              
+              <p className="text-xl md:text-2xl mb-10 text-white/90 max-w-2xl mx-auto text-shadow">
+                Where artistry meets precision in every timepiece
+              </p>
+
+              <motion.div
+                className="flex gap-4 justify-center flex-wrap"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+              >
+                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                  <Button 
+                    size="lg" 
+                    className="bg-white text-black hover:bg-white/90 px-8 py-6 text-lg"
+                  >
+                    Shop Now <ChevronRight className="ml-2" />
+                  </Button>
+                </motion.div>
+                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                  <Button 
+                    size="lg" 
+                    variant="outline" 
+                    className="px-8 py-6 text-lg bg-black/20 text-white border-white hover:bg-black/40"
+                  >
+                    Watch Video
+                  </Button>
+                </motion.div>
+              </motion.div>
+            </motion.div>
+
+            <motion.div
+              className="mt-16 relative max-w-4xl mx-auto"
+              initial={{ opacity: 0, y: 100 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.6 }}
+            >
+              <div className="relative h-[500px] w-full">
+                <Image
+                  src="https://images.unsplash.com/photo-1524805444758-089113d48a6d"
+                  alt="Featured Clock"
+                  fill
+                  className="rounded-xl shadow-2xl object-cover"
+                  data-atropos-offset="5"
+                  priority
+                  quality={100}
+                />
+                <motion.div
+                  className="absolute -right-4 top-1/2 transform -translate-y-1/2 bg-white/95 backdrop-blur p-6 rounded-lg shadow-xl"
+                  initial={{ opacity: 0, x: 50 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 1 }}
+                >
+                  <p className="font-bold text-lg">Limited Edition</p>
+                  <p className="text-gray-600">Only 50 pieces available</p>
+                  <div className="mt-2 flex items-center">
+                    <Clock className="w-4 h-4 mr-2 text-gray-600" />
+                    <span className="text-sm text-gray-600">Handcrafted in 2024</span>
+                  </div>
+                </motion.div>
+              </div>
+            </motion.div>
+          </Atropos>
+
+          {/* Enhanced Scroll Indicator */}
+          <motion.div 
+            className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+            animate={{ y: [0, 10, 0] }}
+            transition={{ repeat: Infinity, duration: 1.5 }}
+          >
+            <div className="w-6 h-10 border-2 border-white rounded-full relative">
+              <div className="w-1.5 h-1.5 bg-white rounded-full absolute left-1/2 top-2 transform -translate-x-1/2" />
+            </div>
+            <p className="text-white text-sm mt-2 text-center">Scroll to explore</p>
+          </motion.div>
+        </section>
+
+      {/* Features Grid */}
+      <section className="py-24 px-6">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {features.map((feature, index) => (
+            <motion.div
+              key={feature.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.1 }}
+              className="text-center p-6 rounded-xl hover:bg-gray-50 transition-all duration-300"
+            >
+              <motion.div
+                whileHover={{ scale: 1.1 }}
+                className="inline-block p-3 bg-gray-100 rounded-full mb-4"
+              >
+                {feature.icon}
+              </motion.div>
+              <h3 className="text-xl font-bold mb-2">{feature.title}</h3>
+              <p className="text-gray-600">{feature.description}</p>
+            </motion.div>
+          ))}
+        </div>
       </section>
 
-      {/* Featured Products */}
+      {/* Enhanced Featured Products */}
       <section className="py-24 px-6 bg-gray-50">
         <motion.div
           initial={{ opacity: 0 }}
@@ -95,7 +240,29 @@ const LehariLanding = () => {
           viewport={{ once: true }}
           className="max-w-6xl mx-auto"
         >
-          <h2 className="text-4xl font-bold text-center mb-16">Featured Collections</h2>
+          <div className="text-center mb-16">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              <Badge className="mb-4">Our Collection</Badge>
+              <h2 className="text-4xl font-bold mb-4">Featured Timepieces</h2>
+              <p className="text-gray-600 max-w-2xl mx-auto">
+                Discover our handpicked selection of masterfully crafted timepieces
+              </p>
+            </motion.div>
+          </div>
+
+          <Tabs defaultValue="all" className="mb-12">
+            <TabsList className="grid w-full max-w-md mx-auto grid-cols-3">
+              <TabsTrigger value="all">All</TabsTrigger>
+              <TabsTrigger value="vintage">Vintage</TabsTrigger>
+              <TabsTrigger value="modern">Modern</TabsTrigger>
+            </TabsList>
+          </Tabs>
+
+          {/* Products Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {products.map((product, index) => (
               <motion.div
@@ -103,17 +270,37 @@ const LehariLanding = () => {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
-                whileHover={{ scale: 1.05 }}
+                whileHover={{ scale: 1.03 }}
                 className="transition-all duration-300"
               >
-                <Card className="overflow-hidden">
-                  <img src={product.image} alt={product.name} className="w-full h-64 object-cover" />
+                <Card className="overflow-hidden group">
+                  <div className="relative h-64">
+                    <Image
+                      src={product.image}
+                      alt={product.name}
+                      fill
+                      className="object-cover transition-transform duration-300 group-hover:scale-110"
+                    />
+                    {product.badge && (
+                      <Badge className="absolute top-4 right-4">
+                        {product.badge}
+                      </Badge>
+                    )}
+                  </div>
                   <CardContent className="p-4">
                     <h3 className="text-xl font-semibold">{product.name}</h3>
-                    <p className="text-gray-600">{product.price}</p>
+                    <div className="flex justify-between items-center mt-2">
+                      <p className="text-gray-600">{product.price}</p>
+                      <div className="flex items-center">
+                        <Star className="h-4 w-4 text-yellow-400 fill-yellow-400" />
+                        <span className="ml-1 text-sm">{product.rating}</span>
+                      </div>
+                    </div>
                   </CardContent>
                   <CardFooter className="p-4 pt-0">
-                    <Button variant="outline" className="w-full">Quick View</Button>
+                    <Button variant="outline" className="w-full group-hover:bg-black group-hover:text-white transition-colors">
+                      Quick View
+                    </Button>
                   </CardFooter>
                 </Card>
               </motion.div>
