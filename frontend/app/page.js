@@ -19,7 +19,8 @@ const products = [
     price: '$129',
     rating: 4.8,
     badge: 'Best Seller',
-    image: 'https://images.unsplash.com/photo-1501139083538-0139583c060f'
+    // image: 'https://images.unsplash.com/photo-1501139083538-0139583c060f'
+    image: 'https://images.pexels.com/photos/4095545/pexels-photo-4095545.jpeg?auto=compress&cs=tinysrgb&w=600'
   },
   { 
     id: 2, 
