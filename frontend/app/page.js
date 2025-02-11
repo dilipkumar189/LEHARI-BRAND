@@ -28,22 +28,25 @@ const products = [
     price: '$159',
     rating: 4.6,
     badge: 'New',
-    image: 'https://images.unsplash.com/photo-1587925358603-c2eea5305bbc'
+    // image: 'https://images.unsplash.com/photo-1587925358603-c2eea5305bbc'
+    image: 'https://images.unsplash.com/photo-1590587754330-6fc06e3a9bb7?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDJ8fGNsb2NrfGVufDB8fDB8fHww'
   },
   { 
     id: 3, 
     name: 'Minimalist Timepiece', 
     price: '$99',
     rating: 4.7,
-    image: 'https://images.unsplash.com/photo-1495856458515-0637185db551'
+    // image: 'https://images.unsplash.com/photo-1495856458515-0637185db551'
+    image: 'https://images.unsplash.com/photo-1602162786736-1575a5b1be76?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NTN8fGNsb2NrfGVufDB8fDB8fHww'
   },
   { 
     id: 4, 
-    name: 'Rustic Grandfather Clock', 
+    name: 'Rustic Clock', 
     price: '$299',
     rating: 4.9,
     badge: 'Limited',
-    image: 'https://images.unsplash.com/photo-1415604934674-561df9abf539'
+    // image: 'https://images.unsplash.com/photo-1415604934674-561df9abf539'
+    image: 'https://images.unsplash.com/photo-1583564992056-3261b28df072?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjM4fHxjbG9ja3xlbnwwfHwwfHx8MA%3D%3D'
   }
 ];
 
@@ -98,7 +101,8 @@ const LehariLanding = () => {
           >
             <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-white" />
             <Image
-              src="https://images.unsplash.com/photo-1461988320302-91bde64fc8e4"
+              // src="https://images.unsplash.com/photo-1461988320302-91bde64fc8e4"
+              src="https://images.unsplash.com/photo-1583350075198-eb3d817a1d97?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjc2fHxjbG9ja3xlbnwwfHwwfHx8MA%3D%3D"
               alt="Background"
               fill
               className="object-cover"
@@ -171,7 +175,8 @@ const LehariLanding = () => {
             >
               <div className="relative h-[500px] w-full">
                 <Image
-                  src="https://images.unsplash.com/photo-1524805444758-089113d48a6d"
+                  // src="https://images.unsplash.com/photo-1524805444758-089113d48a6d"
+                  src="https://images.unsplash.com/photo-1567564675259-6c6268b64236?q=80&w=1472&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                   alt="Featured Clock"
                   fill
                   className="rounded-xl shadow-2xl object-cover"
@@ -179,7 +184,7 @@ const LehariLanding = () => {
                   priority
                   quality={100}
                 />
-                <motion.div
+                {/* <motion.div
                   className="absolute -right-4 top-1/2 transform -translate-y-1/2 bg-white/95 backdrop-blur p-6 rounded-lg shadow-xl"
                   initial={{ opacity: 0, x: 50 }}
                   animate={{ opacity: 1, x: 0 }}
@@ -191,7 +196,7 @@ const LehariLanding = () => {
                     <Clock className="w-4 h-4 mr-2 text-gray-600" />
                     <span className="text-sm text-gray-600">Handcrafted in 2024</span>
                   </div>
-                </motion.div>
+                </motion.div> */}
               </div>
             </motion.div>
           </Atropos>
@@ -318,7 +323,8 @@ const LehariLanding = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
           >
-            <img src="https://images.unsplash.com/photo-1621600411688-4be93cd68504" alt="Artisan Working" className="rounded-lg shadow-xl" />
+            {/* https://images.unsplash.com/photo-1621600411688-4be93cd68504 */}
+            <img src="https://images.unsplash.com/photo-1514371879740-2e7d2068f502?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzgwfHxjbG9ja3xlbnwwfHwwfHx8MA%3D%3D" alt="Artisan Working" className="rounded-lg shadow-xl" />
           </motion.div>
           <motion.div
             initial={{ opacity: 0, x: 50 }}
